@@ -9,7 +9,7 @@ interface UniformChallengeProps {
 
 const BOTTLE_OPTIONS = [4, 6, 8, 10, 12];
 
-function difficultyKey(count: number): string {
+function difficultyKey(count: number): "beginner" | "normal" | "advanced" | "expert" | "ultimate" {
   if (count <= 4) return "beginner";
   if (count <= 6) return "normal";
   if (count <= 8) return "advanced";

@@ -36,9 +36,6 @@ npm run preview    # 预览构建产物
 ### 👥 联机模式（框架）
 支持 8/9/10/11/12 瓶对战，可选择 2~6 名玩家。联机逻辑待实现。
 
-### 🧪 测试模式
-主页底部隐藏入口。8 个瓶子全部使用 bottle1.png，无槽位编号，纯逻辑推理。
-
 ## 操作方式
 
 - **点击交换**：点击一个瓶子使其高亮，再点击另一个瓶子，两者互换位置
@@ -113,7 +110,7 @@ public/
 ## 数据持久化
 
 - **关卡进度**：`localStorage` key `rightplace-level-progress`，存星级、最佳记录
-- **语言偏好**：`localStorage` key `rightplace-language`，默认 English
+- **语言偏好**：`localStorage` key `gameshin:language`，默认 English
 - **首次引导**：`rightplace-tutorial-done`，首次自由模式弹窗后标记
 
 ## 关卡难度分布

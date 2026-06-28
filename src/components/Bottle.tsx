@@ -44,19 +44,6 @@ export default function Bottle({
   return (
     <motion.div
       layout
-      role="button"
-      tabIndex={disabled ? -1 : 0}
-      draggable={!disabled}
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
-      onDrop={handleDropEvent}
-      onClick={handleClick}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleClick();
-        }
-      }}
       animate={
         isSelected
           ? {
@@ -66,19 +53,36 @@ export default function Bottle({
             }
           : { scale: 1, y: 0 }
       }
-      className={`
-        cursor-pointer select-none rounded-lg flex items-center justify-center
-        ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-        ${isSelected ? "ring-2 ring-emerald-400/60" : ""}
-      `}
       style={{ willChange: "transform" }}
+      className={disabled ? "opacity-50" : ""}
     >
-      <img
-        src={`/bottle${bottle.imageIndex}.png`}
-        alt=""
-        draggable={false}
-        className="w-[76px] h-[140px] sm:w-[88px] sm:h-[160px] object-contain"
-      />
+      <div
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        draggable={!disabled}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        onDrop={handleDropEvent}
+        onClick={handleClick}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleClick();
+          }
+        }}
+        className={`
+          cursor-pointer select-none rounded-lg flex items-center justify-center
+          ${disabled ? "cursor-not-allowed" : ""}
+          ${isSelected ? "ring-2 ring-emerald-400/60" : ""}
+        `}
+      >
+        <img
+          src={`/bottle${bottle.imageIndex}.png`}
+          alt=""
+          draggable={false}
+          className="w-[76px] h-[140px] sm:w-[88px] sm:h-[160px] object-contain"
+        />
+      </div>
     </motion.div>
   );
 }

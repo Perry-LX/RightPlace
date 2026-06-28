@@ -17,7 +17,7 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function getInitialLanguage(): Lang {
   if (typeof window === "undefined") return "en";
-  const stored = localStorage.getItem("rightplace-language");
+  const stored = localStorage.getItem("gameshin:language");
   if (stored === "zh" || stored === "en") return stored;
   return "en";
 }
@@ -26,7 +26,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(getInitialLanguage);
 
   useEffect(() => {
-    localStorage.setItem("rightplace-language", lang);
+    localStorage.setItem("gameshin:language", lang);
   }, [lang]);
 
   const t: LanguageContextValue["t"] = (key, params) => {

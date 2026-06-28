@@ -13,7 +13,7 @@ import type { Page } from "./types/game";
 
 function AppContent() {
   const [page, setPage] = useState<Page>("home");
-  const { initFreePlay, initLevel, initTestMode, initUniformGame } = useGameStore();
+  const { initFreePlay, initLevel, initUniformGame } = useGameStore();
 
   const handleStartFreePlay = useCallback(
     (count: number) => {
@@ -67,11 +67,6 @@ function AppContent() {
     setPage("home");
   }, []);
 
-  const handleStartTestMode = useCallback(() => {
-    initTestMode();
-    setPage("game");
-  }, [initTestMode]);
-
   const handleStartUniform = useCallback(() => {
     setPage("uniform");
   }, []);
@@ -116,7 +111,6 @@ function AppContent() {
           onStartLatestLevel={handleStartLatestLevel}
           onStartNoviceMode={handleStartNoviceMode}
           onStartMultiplayer={handleStartMultiplayer}
-          onStartTestMode={handleStartTestMode}
           onStartUniform={handleStartUniform}
         />
       )}

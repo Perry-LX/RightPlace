@@ -7,7 +7,13 @@ interface NoviceModeProps {
   onBack: () => void;
 }
 
-const BOTTLE_OPTIONS = [4, 6, 8, 10, 12];
+const OPTIONS: { count: number; descKey: "easy" | "normal" | "hard" | "expert" | "hell" }[] = [
+  { count: 4, descKey: "easy" },
+  { count: 6, descKey: "normal" },
+  { count: 8, descKey: "hard" },
+  { count: 10, descKey: "expert" },
+  { count: 12, descKey: "hell" },
+];
 
 export default function NoviceMode({ onStart, onBack }: NoviceModeProps) {
   const { t } = useTranslation();
@@ -44,25 +50,25 @@ export default function NoviceMode({ onStart, onBack }: NoviceModeProps) {
 
         {/* Bottle count options */}
         <div className="w-full max-w-xs space-y-2">
-          {BOTTLE_OPTIONS.map((count, i) => (
+          {OPTIONS.map((opt, i) => (
             <motion.button
-              key={count}
+              key={opt.count}
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.06, duration: 0.3 }}
-              onClick={() => onStart(count)}
+              onClick={() => onStart(opt.count)}
               className="w-full flex items-center justify-between gap-3 px-5 py-3.5 bg-white hover:bg-violet-50 active:bg-violet-100 border border-zinc-200 hover:border-violet-300 rounded-xl transition-all duration-150 cursor-pointer group"
             >
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-violet-100 flex items-center justify-center text-base font-bold text-violet-600 group-hover:bg-violet-200 transition-colors duration-150">
-                  {count}
+                  {opt.count}
                 </div>
                 <div className="text-left">
                   <div className="text-sm font-semibold text-zinc-800">
-                    {count}{t("home.bottles")}
+                    {opt.count}{t("home.bottles")}
                   </div>
                   <div className="text-[11px] text-zinc-400">
-                    {t(`home.difficultyDesc.${["easy","normal","hard","expert","hell"][i]}`)}
+                    {t(`home.difficultyDesc.${opt.descKey}`)}
                   </div>
                 </div>
               </div>

@@ -18,7 +18,6 @@ interface HomeScreenProps {
   onStartLatestLevel: (levelId: string) => void;
   onStartNoviceMode: () => void;
   onStartMultiplayer: () => void;
-  onStartTestMode: () => void;
   onStartUniform: () => void;
 }
 
@@ -28,7 +27,6 @@ export default function HomeScreen({
   onStartLatestLevel,
   onStartNoviceMode,
   onStartMultiplayer,
-  onStartTestMode,
   onStartUniform,
 }: HomeScreenProps) {
   const { t } = useTranslation();
@@ -170,14 +168,6 @@ export default function HomeScreen({
         </div>
         <ArrowRight size={18} weight="bold" />
       </motion.button>
-
-      {/* Test Mode */}
-      <button
-        onClick={onStartTestMode}
-        className="mt-8 text-[11px] text-zinc-300 hover:text-zinc-500 transition-colors cursor-pointer underline underline-offset-2 decoration-dotted"
-      >
-        测试模式 — 8瓶 · 同图推理
-      </button>
     </div>
   );
 }
