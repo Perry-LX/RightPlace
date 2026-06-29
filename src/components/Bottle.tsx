@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useState } from "react";
 import type { Bottle as BottleType } from "../types/game";
 
 interface BottleProps {
@@ -20,6 +21,8 @@ export default function Bottle({
   onDrop,
   disabled,
 }: BottleProps) {
+  const [imgError, setImgError] = useState(false);
+
   const handleDragStart = (e: React.DragEvent) => {
     e.dataTransfer.setData("text/plain", String(position));
     e.dataTransfer.effectAllowed = "move";
@@ -41,9 +44,12 @@ export default function Bottle({
     onSelect();
   };
 
+  const handleImgError = () => {
+    setImgError(true);
+  };
+
   return (
     <motion.div
-      layout
       animate={
         isSelected
           ? {
@@ -53,7 +59,6 @@ export default function Bottle({
             }
           : { scale: 1, y: 0 }
       }
-      style={{ willChange: "transform" }}
       className={disabled ? "opacity-50" : ""}
     >
       <div
@@ -71,17 +76,25 @@ export default function Bottle({
           }
         }}
         className={`
-          cursor-pointer select-none rounded-lg flex items-center justify-center
+          cursor-pointer select-none rounded-lg flex items-center justify-center relative
           ${disabled ? "cursor-not-allowed" : ""}
           ${isSelected ? "ring-2 ring-emerald-400/60" : ""}
         `}
       >
-        <img
-          src={`/bottle${bottle.imageIndex}.png`}
-          alt=""
-          draggable={false}
-          className="w-[76px] h-[140px] sm:w-[88px] sm:h-[160px] object-contain"
-        />
+        {imgError ? (
+          <div className="w-[76px] h-[140px] sm:w-[88px] sm:h-[160px] flex items-center justify-center bg-zinc-100 rounded-lg text-4xl">
+            🍾
+          </div>
+        ) : (
+          <img
+            key={bottle.imageIndex}
+            src={`/bottles/bottle${bottle.imageIndex}.png`}
+            alt=""
+            draggable={false}
+            onError={handleImgError}
+            className="w-[76px] h-[140px] sm:w-[88px] sm:h-[160px] object-contain"
+          />
+        )}
       </div>
     </motion.div>
   );

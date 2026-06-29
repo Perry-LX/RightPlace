@@ -1,0 +1,54 @@
+# robots.txt - RightPlace (摆瓶子游戏)
+# All search engines and AI bots are welcome
+
+# --- Traditional Search Engines ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp      # Yahoo
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# --- AI Search Engines (GEO) ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended  # Google AI / Gemini
+Allow: /
+
+User-agent: CCBot            # Common Crawl (used by some AI)
+Allow: /
+
+# --- Others ---
+User-agent: Applebot
+Allow: /
+
+User-agent: ia_archiver      # Alexa / Archive.org
+Allow: /
+
+# --- Allow all other bots ---
+User-agent: *
+Allow: /
+
+# --- Sitemap ---
+Sitemap: https://rightplace.example.com/sitemap.xml
