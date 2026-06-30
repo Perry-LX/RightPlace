@@ -29,3 +29,9 @@ tsconfig.tsbuildinfo
 
 # Claude Code (AI agent workspace)
 .claude/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
