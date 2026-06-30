@@ -46,7 +46,7 @@ npm run preview    # 预览构建产物
 
 ## 视觉主题
 
-4 套主题交错出现，不影响关卡难度。所有瓶子使用 13 张真实 PNG 图片渲染：
+4 套主题交错出现，不影响关卡难度。所有瓶子使用 13 张真实 PNG 图片渲染（位于 `public/bottles/`）：
 
 | 主题 | 风格 | 图片 |
 |------|------|------|
@@ -54,6 +54,38 @@ npm run preview    # 预览构建产物
 | 科学实验室 | 锥形瓶、量筒、试管等 | bottle2~13 交错 |
 | 魔法药水 | 水晶球、魔法瓶、星月瓶等 | 同上交错 |
 | 远古遗迹 | 陶罐、石像、符文瓶等 | 同上交错 |
+
+## SEO & GEO 优化
+
+项目已针对搜索引擎和 AI 搜索引擎进行了优化：
+
+### 传统 SEO
+- 完整 Meta 标签（description、keywords、robots、canonical）
+- Open Graph / Twitter Cards 社交分享标签
+- hreflang 多语言标注（中文 / English）
+- 语义化 title 结构
+- 结构化数据（JSON-LD: WebApplication + Organization）
+
+### GEO（AI 搜索引擎优化）
+- **FAQPage Schema**（+40% AI 可见性）— 5 个问答覆盖游戏介绍、判定机制、关卡数量、游戏模式、免费信息
+- **robots.txt** 明确允许所有 AI 机器人：
+  - `GPTBot` / `ChatGPT-User` → ChatGPT 网页浏览
+  - `PerplexityBot` → Perplexity AI
+  - `ClaudeBot` / `anthropic-ai` → Claude AI
+  - `Google-Extended` → Google AI / Gemini
+- 结构化内容嵌入统计数据（630 关、11 阶段、6 种模式等）
+- `sitemap.xml` 含 hreflang 替代链接
+
+### 配置文件
+- `public/robots.txt` — 搜索引擎和 AI 机器人访问规则
+- `public/sitemap.xml` — XML 站点地图
+
+## 可视适配
+
+所有游戏界面严格限制在视口（`100dvh`）内，不溢出、不滚动：
+- **弹性间距布局**：首页和游戏页使用 flex spacer 自动分配空间，大屏舒展、小屏紧凑
+- **自适应瓶子尺寸**：瓶子图片使用 `clamp(68px, 20dvh, 160px)` 随视口高度缩放
+- **提示窗口**：引导和结算面板限制 `max-h-[85dvh]` 内部可滚动，滚动条隐藏
 
 ## 多语言支持
 
@@ -74,37 +106,50 @@ npm run preview    # 预览构建产物
 ## 项目结构
 
 ```
-src/
-├── types/game.ts              # 类型定义
-├── data/
-│   ├── levels.ts              # 630 个关卡配置
-│   └── themes.ts              # 4 套主题（13 张瓶子图片索引）
-├── stores/
-│   ├── gameStore.ts           # 游戏状态（瓶子、位置、判定、计时）
-│   └── levelStore.ts          # 关卡进度持久化（localStorage）
-├── i18n/
-│   ├── translations.ts        # 中英文翻译表（80+ key）
-│   └── LanguageProvider.tsx    # 语言 Context + useTranslation hook
-├── components/
-│   ├── HomeScreen.tsx          # 主菜单（6 种模式入口）
-│   ├── LevelSelect.tsx        # 关卡选择（仅显示已解锁关卡）
-│   ├── MultiplayerMode.tsx     # 联机模式配置页
-│   ├── UniformChallenge.tsx    # 同瓶挑战模式选择页
-│   ├── NoviceMode.tsx          # 新手模式选择页（5 档瓶数）
-│   ├── GameScreen.tsx          # 核心游戏界面（含视觉教练指示器）
-│   ├── TutorialGuide.tsx       # 操作引导弹窗（4 步骤 + 同瓶提示）
-│   ├── GameCoach.tsx           # 动态游戏教练（上下文提示）
-│   ├── Bottle.tsx              # 瓶子组件（真实图片 + 选中动画 + layout 交换）
-│   ├── Timer.tsx               # 计时器（支持暂停冻结）
-│   ├── JudgeFeedback.tsx       # 判定结果反馈动画
-│   ├── JudgeHistory.tsx        # 判定历史记录
-│   ├── SettlementPanel.tsx     # 结算面板（星星、时间、判定次数）
-│   └── LanguageSwitcher.tsx    # 语言切换下拉（Portal 渲染）
-├── App.tsx                    # 页面路由（7 个页面）
-└── main.tsx                   # 入口
-
-public/
-├── bottle1.png ~ bottle13.png  # 13 张瓶子图片
+RightPlace/
+├── index.html                  # 入口 HTML（含 SEO/GEO meta + JSON-LD）
+├── vite.config.ts              # Vite 配置
+├── package.json
+│
+├── public/
+│   ├── bottles/                # 13 张瓶子图片 (bottle1.png ~ bottle13.png)
+│   ├── robots.txt              # 搜索引擎 / AI 机器人访问规则
+│   └── sitemap.xml             # XML 站点地图
+│
+├── src/
+│   ├── types/game.ts           # 类型定义
+│   ├── data/
+│   │   ├── levels.ts           # 630 个关卡配置
+│   │   └── themes.ts           # 4 套主题（13 张瓶子图片索引）
+│   ├── stores/
+│   │   ├── gameStore.ts        # 游戏状态（瓶子、位置、判定、计时）
+│   │   └── levelStore.ts       # 关卡进度持久化（localStorage）
+│   ├── i18n/
+│   │   ├── translations.ts     # 中英文翻译表（80+ key）
+│   │   └── LanguageProvider.tsx # 语言 Context + useTranslation hook
+│   ├── components/
+│   │   ├── HomeScreen.tsx       # 主菜单（6 种模式入口，弹性间距布局）
+│   │   ├── LevelSelect.tsx     # 关卡选择（仅显示已解锁关卡）
+│   │   ├── MultiplayerMode.tsx  # 联机模式配置页
+│   │   ├── UniformChallenge.tsx # 同瓶挑战模式选择页
+│   │   ├── NoviceMode.tsx       # 新手模式选择页（5 档瓶数）
+│   │   ├── GameScreen.tsx       # 核心游戏界面（dvh 约束 + 自适应布局）
+│   │   ├── TutorialGuide.tsx    # 操作引导弹窗（4 步骤 + 同瓶提示）
+│   │   ├── GameCoach.tsx        # 动态游戏教练（上下文提示）
+│   │   ├── Bottle.tsx           # 瓶子组件（图片加载容错 + dvh 自适应）
+│   │   ├── Timer.tsx            # 计时器（支持暂停冻结）
+│   │   ├── JudgeFeedback.tsx    # 判定结果反馈动画
+│   │   ├── JudgeHistory.tsx     # 判定历史记录
+│   │   ├── SettlementPanel.tsx  # 结算面板（星星、时间、判定次数）
+│   │   └── LanguageSwitcher.tsx # 语言切换下拉（Portal 渲染）
+│   ├── App.tsx                 # 页面路由（7 个页面）
+│   ├── main.tsx                # 入口
+│   └── index.css               # 全局样式（含 hide-scrollbar 工具类）
+│
+├── .claude/                    # Claude Code 配置
+│   └── skills/seo-geo/        # SEO/GEO 优化技能参考
+│
+└── dist/                       # 构建产物
 ```
 
 ## 数据持久化

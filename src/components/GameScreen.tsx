@@ -155,9 +155,9 @@ export default function GameScreen({ onBack }: GameScreenProps) {
   }
 
   return (
-    <div className="min-h-[100dvh] flex flex-col">
+    <div className="h-dvh flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-200/80 bg-white/80 backdrop-blur-md">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-200/80 bg-white/80 backdrop-blur-md flex-shrink-0">
         <button
           onClick={onBack}
           className="flex items-center gap-1 text-sm font-medium text-zinc-500 hover:text-zinc-800 transition-colors cursor-pointer"
@@ -213,9 +213,9 @@ export default function GameScreen({ onBack }: GameScreenProps) {
       </div>
 
       {/* Game Area */}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 overflow-y-auto">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-2 overflow-hidden min-h-0">
         {/* Bottle Grid */}
-        <div className="flex-1 flex flex-col items-center justify-center w-full gap-2">
+        <div className="flex-1 flex flex-col items-center justify-center w-full gap-1 min-h-0">
           {/* Bottle-area hint */}
           {showCoach && (coachPhase === "initial" || coachPhase === "selected") && (
             <motion.div
@@ -300,7 +300,7 @@ export default function GameScreen({ onBack }: GameScreenProps) {
 
         {/* Dynamic coach — 4/6 bottle free play + uniform levels */}
         {showCoach && (
-          <div className="w-full max-w-sm mt-4">
+          <div className="w-full max-w-sm mt-2">
             <GameCoach
               hasStarted={hasStarted}
               selectedPosition={selectedPosition}
@@ -313,7 +313,7 @@ export default function GameScreen({ onBack }: GameScreenProps) {
         )}
 
         {/* Judge Feedback & Controls */}
-        <div className="w-full max-w-sm mt-4 space-y-3">
+        <div className="w-full max-w-sm mt-2 space-y-2">
           {/* Judge Feedback */}
           <JudgeFeedback
             latestResult={

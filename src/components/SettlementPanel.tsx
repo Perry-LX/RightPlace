@@ -75,10 +75,10 @@ export default function SettlementPanel({
             damping: 25,
             duration: 0.5,
           }}
-          className="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden"
+          className="bg-white rounded-3xl shadow-2xl w-full max-w-sm max-h-[85dvh] overflow-y-auto hide-scrollbar"
         >
           {/* Stars */}
-          <div className="pt-8 pb-6 flex flex-col items-center gap-3">
+          <div className="pt-6 pb-4 flex flex-col items-center gap-2">
             <span className="text-xs font-medium text-zinc-400 uppercase tracking-widest">
               {isLevelMode
                 ? t("settlement.level", { n: levelNum })

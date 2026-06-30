@@ -82,7 +82,13 @@ export default function Bottle({
         `}
       >
         {imgError ? (
-          <div className="w-[76px] h-[140px] sm:w-[88px] sm:h-[160px] flex items-center justify-center bg-zinc-100 rounded-lg text-4xl">
+          <div
+            className="flex items-center justify-center bg-zinc-100 rounded-lg text-3xl sm:text-4xl flex-shrink-0"
+            style={{
+              width: 'clamp(40px, 11dvh, 88px)',
+              height: 'clamp(68px, 20dvh, 160px)',
+            }}
+          >
             🍾
           </div>
         ) : (
@@ -92,7 +98,11 @@ export default function Bottle({
             alt=""
             draggable={false}
             onError={handleImgError}
-            className="w-[76px] h-[140px] sm:w-[88px] sm:h-[160px] object-contain"
+            className="object-contain"
+            style={{
+              width: 'clamp(40px, 11dvh, 88px)',
+              height: 'clamp(68px, 20dvh, 160px)',
+            }}
           />
         )}
       </div>
